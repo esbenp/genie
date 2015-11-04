@@ -1,12 +1,12 @@
 {
-    "name": "optimus/laravel-boilerplate",
+    "name": "optimus/eloquent",
     "autoload": {
         "psr-4": {
-            "Optimus\\LaravelBoilerplate\\": "src/"
+            "Optimus\\Database\\Eloquent\\": "src/"
         }
     },
     "require": {
-        "laravel/framework": "~5.1"
+        "illuminate/database": "~4.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
