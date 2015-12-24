@@ -13,7 +13,7 @@ abstract class Repository
 
     protected $model;
 
-    protected $defaultSort = null;
+    protected $sortProperty = null;
 
     abstract protected function getModel();
 
@@ -68,7 +68,7 @@ abstract class Repository
      * @param  array  $options
      * @return Collection
      */
-    public function getWhereRecent($column, $value, array $options = [])
+    public function getRecentWhere($column, $value, array $options = [])
     {
         $query = $this->createBaseBuilder($options);
 
@@ -174,8 +174,8 @@ abstract class Repository
 
         $this->applyResourceOptions($query, $options);
 
-        if (!isset($options['sort']) && isset($this->defaultSort)) {
-            $query->orderBy($this->defaultSort);
+        if (!isset($options['sort'])) {
+            $this->sortQuery($query, $options);
         }
 
         return $query;
@@ -198,5 +198,18 @@ abstract class Repository
     protected function getPrimaryKey(Builder $query)
     {
         return $query->getModel()->getKeyName();
+    }
+
+    /**
+     * Order query by the specified sorting property
+     * @param  Builder $query
+     * @param  array  $options
+     * @return void
+     */
+    protected function sortQuery(Builder $query, array $options = [])
+    {
+        if (isset($this->sortProperty)) {
+            $query->orderBy($this->sortProperty);
+        }
     }
 }
