@@ -175,7 +175,7 @@ abstract class Repository
         $this->applyResourceOptions($query, $options);
 
         if (!isset($options['sort'])) {
-            $this->sortQuery($query, $options);
+            $this->defaultSort($query, $options);
         }
 
         return $query;
@@ -206,7 +206,7 @@ abstract class Repository
      * @param  array  $options
      * @return void
      */
-    protected function sortQuery(Builder $query, array $options = [])
+    protected function defaultSort(Builder $query, array $options = [])
     {
         if (isset($this->sortProperty)) {
             $query->orderBy($this->sortProperty);
