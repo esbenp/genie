@@ -15,11 +15,11 @@ abstract class Repository
 
     protected $defaultSort = null;
 
-    abstract protected function setModel();
+    abstract protected function getModel();
 
     final public function __construct()
     {
-        $this->setModel();
+        $this->model = $this->getModel();
     }
 
     /**
