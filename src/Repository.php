@@ -122,7 +122,7 @@ abstract class Repository
      * @param  array $options
      * @return Builder
      */
-    private function createBaseBuilder(array $options = [])
+    protected function createBaseBuilder(array $options = [])
     {
         $query = $this->createQueryBuilder();
 
@@ -139,7 +139,7 @@ abstract class Repository
      * Creates a new query builder
      * @return Builder
      */
-    private function createQueryBuilder()
+    protected function createQueryBuilder()
     {
         return $this->model->newQuery();
     }
@@ -149,7 +149,7 @@ abstract class Repository
      * @param  Builder $query
      * @return string
      */
-    private function getPrimaryKey(Builder $query)
+    protected function getPrimaryKey(Builder $query)
     {
         return $query->getModel()->getKeyName();
     }
