@@ -134,6 +134,7 @@ abstract class Repository
         $query = $this->createQueryBuilder();
 
         $query->where($this->getPrimaryKey($query), $id);
+        $query->delete();
     }
 
     /**
