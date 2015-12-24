@@ -79,6 +79,22 @@ abstract class Repository
     }
 
     /**
+     * Get resources where a column value exists in array
+     * @param  string $column
+     * @param  array  $values
+     * @param  array $options
+     * @return Collection
+     */
+    public function getWhereIn($column, array $values, array $options = [])
+    {
+        $query = $this->createBaseBuilder($options);
+
+        $query->whereIn($column, $values);
+
+        return $query->get();
+    }
+
+    /**
      * Delete a resource by its primary key
      * @param  mixed $id
      * @return void
