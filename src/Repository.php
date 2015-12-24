@@ -48,6 +48,36 @@ abstract class Repository
     }
 
     /**
+     * Get all resources ordered by recentness
+     * @param  array $options
+     * @return Collection
+     */
+    public function getRecent(array $options = [])
+    {
+        $query = $this->createBaseBuilder($options);
+
+        $query->orderBy('created_at', 'DESC');
+
+        return $query->get();
+    }
+
+    /**
+     * Get all resources by a where clause ordered by recentness
+     * @param  string $column
+     * @param  mixed $value
+     * @param  array  $options
+     * @return Collection
+     */
+    public function getWhereRecent($column, $value, array $options = [])
+    {
+        $query = $this->createBaseBuilder($options);
+
+        $query->orderBy('created_at', 'DESC');
+
+        return $query->get();
+    }
+
+    /**
      * Get resources by a where clause
      * @param  string $column
      * @param  mixed $value
