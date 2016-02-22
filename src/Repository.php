@@ -178,7 +178,7 @@ abstract class Repository
 
         $this->applyResourceOptions($query, $options);
 
-        if (!isset($options['sort'])) {
+        if (empty($options['sort'])) {
             $this->defaultSort($query, $options);
         }
 
