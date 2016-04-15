@@ -1,11 +1,11 @@
 {
-    "name": "optimus/eloquent",
+    "name": "optimus/genie",
     "autoload": {
         "files": [
 			"tests/TestCase.php"
 		],
         "psr-4": {
-            "Optimus\\Database\\Eloquent\\": "src/"
+            "Optimus\\Genie\\": "src/"
         }
     },
     "require": {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Optimus\Database\Eloquent;
+namespace Optimus\Genie;
 
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
