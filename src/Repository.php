@@ -5,8 +5,7 @@ namespace Optimus\Database\Eloquent;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Optimus\Database\Eloquent\Model;
-use Optimus\Api\Controller\EloquentBuilderTrait;
+use Optimus\Bruno\EloquentBuilderTrait;
 
 abstract class Repository
 {
@@ -104,13 +103,14 @@ abstract class Repository
      * Get resources by multiple where clauses
      * @param  array  $clauses
      * @param  array $options
+     * @deprecated
      * @return Collection
      */
     public function getWhereArray(array $clauses, array $options = [])
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->whereArray($clauses);
+        $query->where($clauses);
 
         return $query->get();
     }
