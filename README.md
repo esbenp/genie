@@ -51,7 +51,7 @@ The `$options` key given by all get-methods takes the following format:
 Parameter | Value type | Description
 --------- | ---------- | -----------
 includes | array | Array of relationships to eager load
-sort | array | Array of sorting rules, e.g. [['key' => 'username', 'direction' => 'ASC']]
+sort | array | Array of sorting rules, e.g. `[['key' => 'username', 'direction' => 'ASC']]`
 filter_groups | array | See Bruno documentation
 limit | int | Rows per page
 page | int | The page to start from (use with limit)
