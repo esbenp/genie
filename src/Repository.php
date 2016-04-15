@@ -2,6 +2,7 @@
 
 namespace Optimus\Database\Eloquent;
 
+use Illuminate\Database\DatabaseManager;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Optimus\Database\Eloquent\Model;
@@ -10,6 +11,8 @@ use Optimus\Api\Controller\EloquentBuilderTrait;
 abstract class Repository
 {
     use EloquentBuilderTrait;
+
+    protected $database;
 
     protected $model;
 
@@ -20,8 +23,9 @@ abstract class Repository
 
     abstract protected function getModel();
 
-    final public function __construct()
+    final public function __construct(DatabaseManager $database)
     {
+        $this->database = $database;
         $this->model = $this->getModel();
     }
 
