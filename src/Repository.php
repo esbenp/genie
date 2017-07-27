@@ -62,7 +62,7 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->orderBy('created_at', 'DESC');
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
         return $query->get();
     }
@@ -78,7 +78,7 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->orderBy('created_at', 'DESC');
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
         return $query->get();
     }
@@ -220,5 +220,15 @@ abstract class Repository
             $direction = $this->sortDirection === 1 ? 'DESC' : 'ASC';
             $query->orderBy($this->sortProperty, $direction);
         }
+    }
+
+    /**
+     * Get the name of the "created at" column.
+     * More info to https://laravel.com/docs/5.4/eloquent#defining-models
+     * @return string
+     */
+    protected function getCreatedAtColumn()
+    {
+        return ($this->model::CREATED_AT) ? $this->model::CREATED_AT : 'created_at';
     }
 }
