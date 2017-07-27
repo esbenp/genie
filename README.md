@@ -91,6 +91,14 @@ Get `User` rows by multiple where clauses (`[$column1 => $value1, $column2 => $v
 
 Get `User` rows where `$column` can be any of the values given by `$values`
 
+### getLatest (array $options = [])
+
+Get the most recent `User`
+
+### getLatestWhere (string $column, mixed $value, array $options = [])
+
+Get the most recent `User` where `$column=$value`
+
 ### delete ($id)
 
 Delete `User` rows by primary key
