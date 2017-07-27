@@ -92,7 +92,7 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->orderBy('created_at', 'DESC');
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
         return $query->first();
     }
@@ -108,7 +108,7 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->orderBy('created_at', 'DESC');
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
         return $query->first();
     }
