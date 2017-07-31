@@ -22,7 +22,6 @@ abstract class Repository
 
     final public function __construct()
     {
-        $this->database = $database;
         $this->model = $this->getModel();
     }
 
