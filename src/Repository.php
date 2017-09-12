@@ -259,6 +259,7 @@ abstract class Repository
      */
     protected function getCreatedAtColumn()
     {
-        return ($this->model::CREATED_AT) ? $this->model::CREATED_AT : 'created_at';
+        $model = $this->model;
+        return ($model::CREATED_AT) ? $model::CREATED_AT : 'created_at';
     }
 }
