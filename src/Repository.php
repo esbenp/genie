@@ -79,7 +79,7 @@ abstract class Repository
 
         return $query->get();
     }
-    
+
     /**
      * Get latest resource
      * @param  array $options
