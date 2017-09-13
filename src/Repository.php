@@ -111,36 +111,6 @@ abstract class Repository
     }
 
     /**
-     * Get latest resource
-     * @param  array $options
-     * @return Collection
-     */
-    public function getLatest(array $options = [])
-    {
-        $query = $this->createBaseBuilder($options);
-
-        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
-
-        return $query->first();
-    }
-
-    /**
-     * Get latest resource by a where clause
-     * @param  string $column
-     * @param  mixed $value
-     * @param  array  $options
-     * @return Collection
-     */
-    public function getLatestWhere($column, $value, array $options = [])
-    {
-        $query = $this->createBaseBuilder($options);
-
-        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
-
-        return $query->first();
-    }
-
-    /**
      * Get resources by a where clause
      * @param  string $column
      * @param  mixed $value
