@@ -11,8 +11,6 @@ abstract class Repository
 {
     use EloquentBuilderTrait;
 
-    protected $database;
-
     protected $model;
 
     protected $sortProperty = null;
@@ -22,9 +20,8 @@ abstract class Repository
 
     abstract protected function getModel();
 
-    final public function __construct(DatabaseManager $database)
+    final public function __construct()
     {
-        $this->database = $database;
         $this->model = $this->getModel();
     }
 
@@ -83,6 +80,36 @@ abstract class Repository
         return $query->get();
     }
     
+    /**
+     * Get latest resource
+     * @param  array $options
+     * @return Collection
+     */
+    public function getLatest(array $options = [])
+    {
+        $query = $this->createBaseBuilder($options);
+
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
+
+        return $query->first();
+    }
+
+    /**
+     * Get latest resource by a where clause
+     * @param  string $column
+     * @param  mixed $value
+     * @param  array  $options
+     * @return Collection
+     */
+    public function getLatestWhere($column, $value, array $options = [])
+    {
+        $query = $this->createBaseBuilder($options);
+
+        $query->orderBy($this->getCreatedAtColumn(), 'DESC');
+
+        return $query->first();
+    }
+
     /**
      * Get latest resource
      * @param  array $options
