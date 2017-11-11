@@ -203,7 +203,7 @@ abstract class Repository
      * @param  array $options
      * @return Builder
      */
-    protected function createBaseBuilder(array $options = [])
+    public function createBaseBuilder(array $options = [])
     {
         $query = $this->createQueryBuilder();
 
