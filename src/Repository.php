@@ -75,11 +75,13 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
+        $query->where($column, $value);
+
         $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
         return $query->get();
     }
-    
+
     /**
      * Get latest resource
      * @param  array $options
@@ -104,6 +106,8 @@ abstract class Repository
     public function getLatestWhere($column, $value, array $options = [])
     {
         $query = $this->createBaseBuilder($options);
+
+        $query->where($column, $value);
 
         $query->orderBy($this->getCreatedAtColumn(), 'DESC');
 
@@ -137,7 +141,7 @@ abstract class Repository
     {
         $query = $this->createBaseBuilder($options);
 
-        $query->where($clauses);
+        $this->applyWhereArray($query, $clauses);
 
         return $query->get();
     }
@@ -194,7 +198,7 @@ abstract class Repository
     {
         $query = $this->createQueryBuilder();
 
-        $query->whereArray($clauses);
+        $this->applyWhereArray($query, $clauses);
         $query->delete();
     }
 
@@ -258,5 +262,18 @@ abstract class Repository
     {
         $model = $this->model;
         return ($model::CREATED_AT) ? $model::CREATED_AT : 'created_at';
+    }
+
+    protected function applyWhereArray(Builder $query, array $clauses)
+    {
+        foreach ($clauses as $key => $value) {
+            if (is_array($value)) {
+                $query->whereIn($key, $value);
+            } else if (is_null($value)) {
+                $query->whereNull($key);
+            } else {
+                $query->where($key, $value);
+            }
+        }
     }
 }
