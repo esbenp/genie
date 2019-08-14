@@ -234,7 +234,7 @@ abstract class Repository
      * @param  Builder $query
      * @return string
      */
-    protected function getPrimaryKey(Builder $query)
+    protected function getPrimaryKey($query)
     {
         return $query->getModel()->getKeyName();
     }
@@ -245,7 +245,7 @@ abstract class Repository
      * @param  array  $options
      * @return void
      */
-    protected function defaultSort(Builder $query, array $options = [])
+    protected function defaultSort($query, array $options = [])
     {
         if (isset($this->sortProperty)) {
             $direction = $this->sortDirection === 1 ? 'DESC' : 'ASC';
@@ -264,7 +264,7 @@ abstract class Repository
         return ($model::CREATED_AT) ? $model::CREATED_AT : 'created_at';
     }
 
-    protected function applyWhereArray(Builder $query, array $clauses)
+    protected function applyWhereArray($query, array $clauses)
     {
         foreach ($clauses as $key => $value) {
             if (is_array($value)) {
