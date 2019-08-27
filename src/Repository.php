@@ -264,7 +264,7 @@ abstract class Repository
         return ($model::CREATED_AT) ? $model::CREATED_AT : 'created_at';
     }
 
-    protected function applyWhereArray(Builder $query, array $clauses)
+    protected function applyWhereArray($query, array $clauses)
     {
         foreach ($clauses as $key => $value) {
             preg_match('/NOT\:(.+)/', $key, $matches);
