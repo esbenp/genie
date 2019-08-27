@@ -264,15 +264,35 @@ abstract class Repository
         return ($model::CREATED_AT) ? $model::CREATED_AT : 'created_at';
     }
 
-    protected function applyWhereArray($query, array $clauses)
+    protected function applyWhereArray(Builder $query, array $clauses)
     {
         foreach ($clauses as $key => $value) {
+            preg_match('/NOT\:(.+)/', $key, $matches);
+
+            $not = false;
+            if (isset($matches[1])) {
+                $not = true;
+                $key = $matches[1];
+            }
+
             if (is_array($value)) {
-                $query->whereIn($key, $value);
+                if (!$not) {
+                    $query->whereIn($key, $value);
+                } else {
+                    $query->whereNotIn($key, $value);
+                }
             } else if (is_null($value)) {
-                $query->whereNull($key);
+                if (!$not) {
+                    $query->whereNull($key);
+                } else {
+                    $query->whereNotNull($key);
+                }
             } else {
-                $query->where($key, $value);
+                if (!$not) {
+                    $query->where($key, $value);
+                } else {
+                    $query->whereNot($key, $value);
+                }
             }
         }
     }
