@@ -291,7 +291,7 @@ abstract class Repository
                 if (!$not) {
                     $query->where($key, $value);
                 } else {
-                    $query->whereNot($key, $value);
+                    $query->where($key, '!=', $value);
                 }
             }
         }
