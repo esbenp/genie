@@ -267,12 +267,24 @@ abstract class Repository
     protected function applyWhereArray($query, array $clauses)
     {
         foreach ($clauses as $key => $value) {
-            preg_match('/NOT\:(.+)/', $key, $matches);
-
             $not = false;
-            if (isset($matches[1])) {
+            $lower = false;
+
+            if (preg_match('/NOT\:/', $key)) {
                 $not = true;
-                $key = $matches[1];
+            }
+            if (preg_match('/LOWER\:/', $key)) {
+                $lower = true;
+            }
+
+            $key = preg_replace(
+                ['/NOT\:/', '/LOWER\:/'],
+                ['', ''],
+                $key
+            );
+
+            if ($lower) {
+                $key = \DB::raw(sprintf('LOWER(%s)', $key));
             }
 
             if (is_array($value)) {
