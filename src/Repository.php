@@ -269,6 +269,8 @@ abstract class Repository
         foreach ($clauses as $key => $value) {
             $not = false;
             $lower = false;
+            $checkOperator = null;
+            $negativeOperator = '!=';
 
             if (preg_match('/NOT\:/', $key)) {
                 $not = true;
@@ -277,9 +279,34 @@ abstract class Repository
                 $lower = true;
             }
 
+            if (preg_match('/EQ\:/', $key)) {
+                $checkOperator = null;
+                $negativeOperator = '!=';
+            } else if (preg_match('/GTE\:/', $key)) {
+                $checkOperator = '>=';
+                $negativeOperator = '<';
+            } else if (preg_match('/LTE\:/', $key)) {
+                $checkOperator = '<=';
+                $negativeOperator = '>';
+            } else if (preg_match('/GT\:/', $key)) {
+                $checkOperator = '>';
+                $negativeOperator = '<=';
+            } else if (preg_match('/LT\:/', $key)) {
+                $checkOperator = '<';
+                $negativeOperator = '>=';
+            }
+
             $key = preg_replace(
-                ['/NOT\:/', '/LOWER\:/'],
-                ['', ''],
+                [
+                    '/NOT\:/',
+                    '/LOWER\:/',
+                    '/EQ\:/',
+                    '/GTE\:/',
+                    '/LTE\:/',
+                    '/GT\:/',
+                    '/LT\:/',
+                ],
+                '',
                 $key
             );
 
@@ -301,9 +328,13 @@ abstract class Repository
                 }
             } else {
                 if (!$not) {
-                    $query->where($key, $value);
+                    if (empty($checkOperator)) {
+                        $query->where($key, $value);
+                    } else {
+                        $query->where($key, $checkOperator, $value);
+                    }
                 } else {
-                    $query->where($key, '!=', $value);
+                    $query->where($key, $negativeOperator, $value);
                 }
             }
         }

@@ -7,7 +7,7 @@
     },
     "require": {
         "illuminate/database": ">=4.0",
-        "optimus/bruno": "~3.0|~4.0|~5.0|~6.0"
+        "optimus/bruno": "~3.0|~4.0|~5.0|~6.0|~7.0"
     },
     "require-dev": {
         "mockery/mockery": "0.9.*",
@@ -15,10 +15,10 @@
         "satooshi/php-coveralls": "dev-master@dev"
     },
     "autoload-dev": {
-		"files": [
-			"tests/TestCase.php"
-		]
-	},
+        "files": [
+            "tests/TestCase.php"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "license": "MIT"
